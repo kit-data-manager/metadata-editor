@@ -2,7 +2,6 @@
   "name": "metadata-editor",
   "version": "1.0.0-snapshot",
   "main": "./lib/metadataeditor.js",
-  "repository": "https://github.com/jsonform/jsonform",
   "description": "JavaScript library allowing to generate web forms and validate metadata using JSON schemas.",
   "keywords": [
     "JSON",
