@@ -28,18 +28,18 @@ Below you can find an example how can the library be used.
     <head>
         <meta charset="utf-8" />
         <title>Getting started with Metadata Editor</title>
-        <link rel="stylesheet" style="text/css" href="/dependencies/jsonform/deps/opt/bootstrap-v4.css" />
+        <link rel="stylesheet" style="text/css" href="dependencies/jsonform/deps/opt/bootstrap-v4.css" />
     </head>
     <body>
         <div class="container">
            <form id="form"></form>
         </div>
 
-        <script type="text/javascript" src="/dependencies/jsonform/deps/jquery.min.js"></script>
-        <script type="text/javascript" src="/dependencies/jsonform/deps/underscore.js"></script>
-        <script type="text/javascript" src="/dependencies/jsonform/deps/opt/jsv.js"></script>
-        <script type="text/javascript" src="/dependencies/jsonform/lib/jsonform.js"></script>
-        <script type="text/javascript" src="/lib/metadataeditor.js"></script>
+        <script type="text/javascript" src="dependencies/jsonform/deps/jquery.min.js"></script>
+        <script type="text/javascript" src="dependencies/jsonform/deps/underscore.js"></script>
+        <script type="text/javascript" src="dependencies/jsonform/deps/opt/jsv.js"></script>
+        <script type="text/javascript" src="dependencies/jsonform/lib/jsonform.js"></script>
+        <script type="text/javascript" src="lib/metadataeditor.js"></script>
         
         <script>
             var dataModel =
