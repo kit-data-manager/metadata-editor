@@ -102,4 +102,19 @@ Below you can find an example how can the library be used.
     </body>
 </html>
 ```
+The editor library has two attributes:
+A.	“options” attribute: which is a JSON variable and should include the following keys:
+    1.	renderType (Mandatory): the values of this key can be:
+        a.	FORM: in case the user wants to generate a form.
+        b.	TABLE: in case the user wants to generate a table, which includes all resources. (not yet implemented)
+    2.	operation (Mandatory): the name of the operation, which should be executed. It can be “CREATE”, “DELETE” or “UPDATE”. If operation “CREATE” is chosen, then an empty HTML form will be generated. Otherwise, a form, filled with the given values, will be generated. If the “DELETE” operation is chosen, the fields will be shown as readOnly so that the user cannot change their content. To implement this feature, I extended the JSON Form library.
+    3.	dataModel (Mandatory): a JSON data model, which describes the structure of JSON data.
+    4.	uiForm (Mandatory): the JSON user interface form, which describes the structure of the form layout.
+    5.	resource (Optional): represents the JSON resource. 
+B.	“Onsubmitvalid”:  which is a Callback function. If the function was correctly executed, the “value” variable will include the result, which is a validated json resource. Otherwise, an exception will be thrown.
+
+In order to display the form, the developer has to add the form tag as you can see in the example.
+
+
+
 
