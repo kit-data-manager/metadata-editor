@@ -68,8 +68,7 @@
    * The jsonform object whose methods will be exposed to the window object
    */
   var jsonform = {util:{}};
-
-
+  
   // From backbonejs
   var escapeHTML = function (string) {
     if (!isSet(string)) {
@@ -468,10 +467,10 @@ jsonform.elementTypes = {
     'template': '<div class="checkbox"><label><input type="checkbox" id="<%= id %>" ' +
       '<%= (fieldHtmlClass ? " class=\'" + fieldHtmlClass + "\'": "") %>' +
       'name="<%= node.name %>" value="1" <% if (value) {%>checked<% } %>' +
-      '<%= (node.disabled? " disabled" : "")%>' +
+      '<%= (node.disabled ? " disabled" : "")%>' +
       '<%= (node.schemaElement && node.schemaElement.required && (node.schemaElement.type !== "boolean") ? " required=\'required\'" : "") %>' +
       ' /><%= node.inlinetitle || "" %>' +
-      '</label></div>',
+      '<span class="checkmark"></span></label></div>',
     'fieldtemplate': true,
     'inputfield': true,
     'getElement': function (el) {
@@ -823,7 +822,7 @@ jsonform.elementTypes = {
       // Build up choices from the enumeration list
       var choices = null;
       var choiceshtml = null;
-      var template = '<div class="checkbox"><label>' +
+      var template = '<div class="checkbox"><label>'    +
         '<input type="checkbox" <% if (value) { %> checked="checked" <% } %> name="<%= name %>" value="1"' +
         '<%= (node.disabled? " disabled" : "")%>' +
         '/><%= title %></label></div>';
@@ -3198,7 +3197,9 @@ formTree.prototype.buildFromLayout = function (formElement, context) {
       formElement.readOnly ||
       schemaElement.readOnly ||
       formElement.readonly ||
-      schemaElement.readonly;
+      schemaElement.readonly ||
+      readonlyglobal;
+      formElement.disabled=readonlyglobal;
 
     // Compute the ID of the input field
     if (!formElement.id) {
@@ -3412,6 +3413,15 @@ formTree.prototype.computeInitialValues = function () {
  *  root for the form
  */
 formTree.prototype.render = function (domRoot) {
+//    console.log("before ");
+//    console.log(domRoot);
+//     $(domRoot).removeClass('jsonform-readonly');
+//     $(domRoot).removeClass('jsonform-disabled');
+//     $(domRoot).removeAttr('readonly');
+//     $(domRoot).removeAttr('disabled');
+//    console.log("after ");
+//    console.log(domRoot);
+
   if (!domRoot) return;
   this.domRoot = domRoot;
   this.root.render();
@@ -3665,7 +3675,7 @@ $.fn.jsonFormErrors = function(errors, options) {
  */
 $.fn.jsonForm = function(options) {
   var formElt = this;
-
+  if (options.readonly && options.readonly === "true") { readonlyglobal= true;};
   options = _.defaults({}, options, {submitEvent: 'submit'});
 
   var form = new formTree();
@@ -3722,6 +3732,7 @@ $.fn.jsonFormValue = function() {
   return jsonform.getFormValue(this);
 };
 
+var readonlyglobal=false;
 // Expose the getFormValue method to the global object
 // (other methods exposed as jQuery functions)
 global.JSONForm = global.JSONForm || {util:{}};
