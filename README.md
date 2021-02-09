@@ -22,7 +22,8 @@ Getting started
 
 The metadata Editor offers the possibility to generate web forms and list JSON resources. How can the developer generate them and which inputs should be given? This will be explained in details in the next subsections.
 
-    1. List JSON resources:
+1. List JSON resources:
+
 The developer can generate a table, that lists all given JSON resources. The “Tabulator” library is used in order to generate the table. The developer has to call the method “metadataeditorTable()”, which takes as a parameter a JSON object. The object should contain different keys and values that are described in the following table.
 
 | Key                    | Description                                                      | Mandatory/Optional                    | Default Value |
@@ -138,6 +139,7 @@ In addition to the generation of the table, the library enables to generate web 
     * onSubmitValid(value): a Callback function. If the function was correctly executed, the “value” variable will include the result, which is a validated JSON resource. Otherwise, an exception will be thrown.
 
 2.1 Example
+
 Below you can find an example how can the library be used in case of form generation. In order to display the form, the developer has to  add  the form tag as you can see in the example.
 
 ```html
