@@ -37,6 +37,7 @@ The developer can generate a table, that lists all given JSON resources. The “
 | createOperation()      | is a callback function. This method will be executed only when the user clicks on the Create button. In case the developer does not give this callback function, the create button will not be shown.  |Optional |  |
 
         1.1 Example
+
         Below you can find an example how the library can be used, in case the user wants to generate a table and list JSON resources. In order to  display the table, the developer has to add a table tag as you can see in the example.
 
 ```html
@@ -127,6 +128,7 @@ The developer can generate a table, that lists all given JSON resources. The “
 ```
 
     2. Generate Form:
+    
 In addition to the generation of the table, the library enables to generate web forms based on given JSON schemas. It allows adding, modifying or deleting metadata. Moreover, a validation of user-provided metadata is supported by the library. In order to generate a form, “metadataeditorForm()” method should be called. The method should contain the following attributes:
     * “options”: a JSON variable which should include the following keys:
         1. operation (Mandatory): the name of the operation, which should be executed. It can be “CREATE”, “DELETE” or “UPDATE”. If operation “CREATE” is chosen, then an empty HTML form will be generated. Otherwise, if operation "UPDATE" or "DELETE" is chosen, a form, filled with the given values, will be generated. If the “DELETE” operation is chosen, the fields will be shown as readOnly so that the user cannot change their content.
