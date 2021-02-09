@@ -27,10 +27,8 @@ The developer can generate a table, that lists all given JSON resources. The “
 
 | Key                    | Description                                                      | Mandatory/Optional                    | Default Value |
 | ---------------------- | ---------------------------------------------------------------- |---------------------------------------|---------------|
-| dataModel              | represents a JSON schema, which describes the structure of the   | Mandatory                             |     -         |
-|                        | data model that must be created when the form is submitted.      |                                       |               |
-|                        | The JSON schema should follow the properties definition of       |                                       |               |
-|                        | the JSON Schema specification.                                   |                                       |               |
+| dataModel              | represents a JSON schema, which describes the structure of the data model that must be created when the form is submitted. The JSON schema should follow the properties definition of the JSON Schema specification.    | Mandatory                            |     -         |
+
 | uiForm                 | JSON user interface form, which describes the structure of the   | Optional                              | "*"           |
 |                        | form layout. It should follow the properties definition specified|                                       | (Default form |
 |                        | in [the JSON Form library]                                       |                                       | layout is     |
