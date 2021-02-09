@@ -27,16 +27,10 @@ The developer can generate a table, that lists all given JSON resources. The “
 
 | Key                    | Description                                                      | Mandatory/Optional                    | Default Value |
 | ---------------------- | ---------------------------------------------------------------- |---------------------------------------|---------------|
-| dataModel              | represents a JSON schema, which describes the structure of the data model that must be created when the form is submitted. The JSON schema should follow the properties definition of the JSON Schema specification.    | Mandatory                            |     -         |
-| uiForm                 | JSON user interface form, which describes the structure of the form layout. It should follow the properties definition specified in [the JSON Form library] (https://github.com/jsonform/jsonform/wiki#fields)  . | Optional | "*" (Default form layout is generated) |
-| resource               | represents an array of JSON resources.                           | Mandatory (in case Read, Update or Delete operations should be performed)   |     -         |
-| items                  | represents an array of JSON objects, which includes the table’s  | Mandatory                             |     -         |
-|                        | column definitions. Each JSON object should include the following|                                       |               |
-|                        | keys:                                                            |                                       |               |
-|                        |  * “title”: The title that will be displayed in the header for   |                                       |               |
-|                        |  this column                                                     |                                       |               |
-|                        |  * -	“field”: This is the key for this column in the JSON        |                                       |               |
-|                        |  resource.                                                       |                                       |               |
+| dataModel              | represents a JSON schema, which describes the structure of the data model that must be created when the form is submitted. The JSON schema should follow the properties definition of the JSON Schema specification. | Mandatory |- |
+| uiForm                 | JSON user interface form, which describes the structure of the form layout. It should follow the properties definition specified in [the JSON Form library](https://github.com/jsonform/jsonform/wiki#fields)  . | Optional | "*" (Default form layout is generated) |
+| resource               | represents an array of JSON resources. | Mandatory (in case Read, Update or Delete operations should be performed)   |     - |
+| items                  | represents an array of JSON objects, which includes the table’s column definitions. Each JSON object should include the following keys: * “title”: The title that will be displayed in the header for this column. * “field”: This is the key for this column in the JSON resource. | Mandatory | -  |
 | readOperation(value)   | is a callback function. The “value” attribute contains the JSON  | Optional                              |               |
 |                        | resource of the appropriate row, already selected by the user.   |                                       |               |
 |                        | The implementation of this method is project-specific and should |                                       |               |
