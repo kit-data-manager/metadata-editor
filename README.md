@@ -36,9 +36,9 @@ The developer can generate a table, that lists all given JSON resources. The “
 | deleteOperation(value) | is a callback function. The “value” attribute contains the JSON resource of the appropriate row, already selected by the user. The implementation of this method is project-specific and should be performed when the user clicks on the trash icon. In case the developer does not give this callback function, the trash icon will not be shown. | Optional | |
 | createOperation()      | is a callback function. This method will be executed only when the user clicks on the Create button. In case the developer does not give this callback function, the create button will not be shown.  |Optional |  |
 
-        1.1 Example
+1.1 Example
 
-        Below you can find an example how the library can be used, in case the user wants to generate a table and list JSON resources. In order to  display the table, the developer has to add a table tag as you can see in the example.
+Below you can find an example how the library can be used, in case the user wants to generate a table and list JSON resources. In order to  display the table, the developer has to add a table tag as you can see in the example.
 
 ```html
 <!DOCTYPE html>
@@ -137,8 +137,8 @@ In addition to the generation of the table, the library enables to generate web 
         4. resource: a JSON resource used to initialize the generated form. This attribute is Mandatory in case the operation is “UPDATE” or “DELETE”.
     * onSubmitValid(value): a Callback function. If the function was correctly executed, the “value” variable will include the result, which is a validated JSON resource. Otherwise, an exception will be thrown.
 
-        2.1 Example
-        Below you can find an example how can the library be used in case of form generation. In order to display the form, the developer has to add the form tag as you can see in the example.
+2.1 Example
+Below you can find an example how can the library be used in case of form generation. In order to display the form, the developer has to  add  the form tag as you can see in the example.
 
 ```html
 <!DOCTYPE html>
