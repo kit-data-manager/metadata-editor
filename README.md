@@ -128,21 +128,21 @@ Below you can find an example how the library can be used, in case the user want
 </html>
 ```
 
-    2. Generate Form:
+2. Generate Form:
     
 In addition to the generation of the table, the library enables to generate web forms based on given JSON schemas. It allows adding, modifying or deleting metadata. Moreover, a validation of user-provided metadata is supported by the library. In order to generate a form, “metadataeditorForm()” method should be called. The method should contain the following attributes:
 
-    * “options”: a JSON variable which should include the following keys:
+* “options”: a JSON variable which should include the following keys:
 
-        1. operation (Mandatory): the name of the operation, which should be executed. It can be “CREATE”, “DELETE” or “UPDATE”. If operation “CREATE” is chosen, then an empty HTML form will be generated. Otherwise, if operation "UPDATE" or "DELETE" is chosen, a form, filled with the given values, will be generated. If the “DELETE” operation is chosen, the fields will be shown as readOnly so that the user cannot change their content.
+1. operation (Mandatory): the name of the operation, which should be executed. It can be “CREATE”, “DELETE” or “UPDATE”. If operation “CREATE” is chosen, then an empty HTML form will be generated. Otherwise, if operation "UPDATE" or "DELETE" is chosen, a form, filled with the given values, will be generated. If the “DELETE” operation is chosen, the fields will be shown as readOnly so that the user cannot change their content.
 
-        2. dataModel (Mandatory): a JSON data model, which describes the structure of JSON data.
+2. dataModel (Mandatory): a JSON data model, which describes the structure of JSON data.
 
-        3. uiForm (Mandatory): the JSON user interface form, which describes the structure of the form layout.
+3. uiForm (Mandatory): the JSON user interface form, which describes the structure of the form layout.
 
-        4. resource: a JSON resource used to initialize the generated form. This attribute is Mandatory in case the operation is “UPDATE” or “DELETE”.
+4. resource: a JSON resource used to initialize the generated form. This attribute is Mandatory in case the operation is “UPDATE” or “DELETE”.
         
-    * onSubmitValid(value): a Callback function. If the function was correctly executed, the “value” variable will include the result, which is a validated JSON resource. Otherwise, an exception will be thrown.
+* onSubmitValid(value): a Callback function. If the function was correctly executed, the “value” variable will include the result, which is a validated JSON resource. Otherwise, an exception will be thrown.
 
 2.1 Example
 
