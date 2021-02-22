@@ -244,12 +244,12 @@ The layout can be given as a JSON object, which should be added to the inputs de
 
 ```html
 {
-            layout: "fitColumns",
-            height: "100%",
-            paginationSize: 10,
-            pagination: "local",
-            placeholder: "No Data Set"
-        };
+    layout: "fitColumns",
+    height: "100%",
+    paginationSize: 10,
+    pagination: "local",
+    placeholder: "No Data Set"
+};
 ```
 
 3.3 Generation of Modals:
