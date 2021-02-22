@@ -223,9 +223,11 @@ Below you can find an example how can the library be used in case of form genera
 ```
 
 3. Management of the Metadata Editor style:
+
 The metadata editor library gives the possibility to the developer to manage the style of the user interface. It enables to manage the style of the icons, the table or also to generate modal windows. This will be described in the next subsections.
 
 3.1 Icons Style:
+
 The developer can create icons and add them to the inputs of the “metadataeditorTable()” function as a JSON object. The icons should be created with the help of [the “fontawesome” library](https://fontawesome.com/) and can be added to the inputs as below:
 
 | Key                    | Description                                                      | Mandatory/Optional                    | Default Value |
@@ -236,6 +238,7 @@ The developer can create icons and add them to the inputs of the “metadataedit
 | listIcon               | represents the Font awesome class name of the icon, which enables the creation of the list icon. In case the user clicks on this icon, the listOperation() will be performed. | Optional |'fa fa-list' |
 
 3.2 Table Style:
+
 The developer has the possibility to customize the layout of the table. As the generation of the table is made with the help of the tabulator library, its configuration should follow [the tabulator specification](http://tabulator.info/docs/4.0/layout).
 The layout can be given as a JSON object, which should be added to the inputs described in Section 1. The object should have the key “tableLayout”. In case it is not given, then a default table layout is assigned, which have the following value:
 
@@ -250,6 +253,7 @@ The layout can be given as a JSON object, which should be added to the inputs de
 ```
 
 3.3 Generation of Modals:
+
 The Metadata editor enables the developer to generate modal windows with the help of the Bootstrap library. Two modal types are supported: success and failed. The “success” modal can be generated in case an operation is successfully executed. Otherwise, the “failed” modal can be generated. For that, the function “showModal(modalType, message, link)” should be called. The function has three mandatory inputs, which are:
 •	modalType: represents the modal type. It can be “SUCCESS” or “FAILED”.
 •	Message: represents the message, which should be shown in the modal body.
