@@ -160,3 +160,7 @@ input:focus, textarea:focus, select:focus{
     outline: none;
     color: var(--metadataeditor-white);
 }
+
+#editor-buttons{
+    margin-bottom: 25px;   
+}

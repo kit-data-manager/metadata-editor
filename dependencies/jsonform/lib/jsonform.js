@@ -3675,7 +3675,7 @@ $.fn.jsonFormErrors = function(errors, options) {
  */
 $.fn.jsonForm = function(options) {
   var formElt = this;
-  if (options.readonly && options.readonly === "true") { readonlyglobal= true;};
+  (options.readonly === "true") ? readonlyglobal = true: readonlyglobal = false;
   options = _.defaults({}, options, {submitEvent: 'submit'});
 
   var form = new formTree();
@@ -3732,7 +3732,6 @@ $.fn.jsonFormValue = function() {
   return jsonform.getFormValue(this);
 };
 
-var readonlyglobal=false;
 // Expose the getFormValue method to the global object
 // (other methods exposed as jQuery functions)
 global.JSONForm = global.JSONForm || {util:{}};
