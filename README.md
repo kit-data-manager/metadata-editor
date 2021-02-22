@@ -1,7 +1,7 @@
 Metadata Editor
 ===============
 
-The Metadata Editor is a JavaScript library allowing to generate web forms and validate metadata in an intuitive and generic way. The generation of forms is made with the help of [JSON Form Library](https://github.com/jsonform/jsonform/wiki). Moreover, it enables to list various resources given by the user as a JSON object. In addition, the editor offers the possibility to the developer to add different icons in order to perform CRUD (Create, Read, Update, Delete) operations.
+The Metadata Editor is a JavaScript library allowing to generate web forms and validate metadata in an intuitive and generic way with the help of [JSON Form Library](https://github.com/jsonform/jsonform/wiki). Moreover, it enables to list various resources given by the user as a JSON object. In addition, the editor offers the possibility to the developer to add different icons in order to perform CRUD (Create, Read, Update, Delete) operations.
 
 Objectives
 ----------
