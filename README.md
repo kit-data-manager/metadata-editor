@@ -255,8 +255,11 @@ The layout can be given as a JSON object, which should be added to the inputs de
 3.3 Generation of Modals:
 
 The Metadata editor enables the developer to generate modal windows with the help of the Bootstrap library. Two modal types are supported: success and failed. The “success” modal can be generated in case an operation is successfully executed. Otherwise, the “failed” modal can be generated. For that, the function “showModal(modalType, message, link)” should be called. The function has three mandatory inputs, which are:
+
 •	modalType: represents the modal type. It can be “SUCCESS” or “FAILED”.
+
 •	Message: represents the message, which should be shown in the modal body.
+
 •	Link: represents the link of the page, where should be redirected after the modal is closed.
 
 
