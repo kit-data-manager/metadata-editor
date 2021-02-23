@@ -120,7 +120,11 @@ Below you can find an example how the library can be used, in case the user want
             },
             createOperation: { callback: function (){
                 //project-specific implementation.
-            }, buttonTitle: "Name of the Create button"}
+            }, buttonTitle: "Name of the Create button"},
+            
+            listOperation: function(rowColumnvalue){
+                //project-specific implementation.
+            }
             };
 
             $('#table').metadataeditorTable(inputs);
@@ -138,7 +142,7 @@ In addition to the generation of the table, the library enables to generate web 
 1. operation (Mandatory): the name of the operation, which should be executed. It can be “CREATE”, “DELETE” or “UPDATE”. If operation “CREATE” is chosen, then an empty HTML form will be generated. Otherwise, if operation "UPDATE" or "DELETE" is chosen, a form, filled with the given values, will be generated. If the “DELETE” operation is chosen, the fields will be shown as readOnly so that the user cannot change their content. To implement this feature, the JSON Form library has been extended.
 2. dataModel (Mandatory): a JSON data model, which describes the structure of JSON data.
 
-3. uiForm (Mandatory): the JSON user interface form, which describes the structure of the form layout.
+3. uiForm (Optional): the JSON user interface form, which describes the structure of the form layout. In case it is not given, a default form layout will be generated.
 
 4. resource: a JSON resource used to initialize the generated form. This attribute is Mandatory in case the operation is “UPDATE” or “DELETE”.
         
