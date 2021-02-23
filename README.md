@@ -106,10 +106,6 @@ Below you can find an example how the library can be used, in case the user want
                 //project-specific implementation.
                 //rowColumnvalue is the appropriate JSON value and can be used by the developer.
             },
-            readOperation: function (rowColumnvalue){
-                //project-specific implementation.
-                //rowColumnvalue is the appropriate JSON value and can be used by the developer.
-            },
             updateOperation: function (rowColumnvalue){
                 //project-specific implementation.
                 //rowColumnvalue is the appropriate JSON value and can be used by the developer.
