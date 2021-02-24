@@ -50,12 +50,9 @@ Below you can find an example how the library can be used, in case the user want
         <title>Getting started with Metadata Editor</title>
 
         <link rel="stylesheet" style="text/css" href="/editor/dependencies/fontawesome/css/all.css" />
-        <link href="/dist/css/tabulator_bootstrap4.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-        <script type="text/javascript" src="/dist/js/tabulator.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+        <link href="/editor/dependencies/tabulator/css/tabulator_bootstrap4.min.css" rel="stylesheet">
+        <link rel="stylesheet" style="text/css" href="/editor/dependencies/jsonform/deps/opt/bootstrap-v4.5.2.css"/>
+        <link rel="stylesheet" style="text/css" href="/editor/lib/css/metadataeditor.style.default.css" />
     </head>
 
     <body>
@@ -69,10 +66,13 @@ Below you can find an example how the library can be used, in case the user want
                 </div>
             </div>
         </div>
+        <script type="text/javascript" src="/editor/dependencies/jsonform/deps/jquery-v3.5.1.min.js"></script>
+        <script type="text/javascript" src="/editor/dependencies/bootstrap/js/bootstrap-v4.5.3.min.js"></script>
         <script type="text/javascript" src="/editor/dependencies/jsonform/deps/underscore.js"></script>
         <script type="text/javascript" src="/editor/dependencies/jsonform/deps/opt/jsv.js"></script>
         <script type="text/javascript" src="/editor/dependencies/jsonform/lib/jsonform.js"></script>
-        <script type="text/javascript" src="/editor/lib/metadataeditor.js"></script>
+        <script type="text/javascript" src="/editor/dependencies/tabulator/js/tabulator.min.js"></script>
+        <script type="text/javascript" src="/editor/lib/js/metadataeditor.js"></script>
         <script>
             var dataModel = {
                 "type": "object",
@@ -156,22 +156,22 @@ Below you can find an example how can the library be used in case of form genera
         <title>Getting started with Metadata Editor</title>
 
         <link rel="stylesheet" style="text/css" href="/editor/dependencies/fontawesome/css/all.css" />
-        <link href="/dist/css/tabulator_bootstrap4.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-        <script type="text/javascript" src="/dist/js/tabulator.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+        <link href="/editor/dependencies/tabulator/css/tabulator_bootstrap4.min.css" rel="stylesheet">
+        <link rel="stylesheet" style="text/css" href="/editor/dependencies/jsonform/deps/opt/bootstrap-v4.5.2.css"/>
+        <link rel="stylesheet" style="text/css" href="/editor/lib/css/metadataeditor.style.default.css" />
     </head>
 
     <body>
         <div class="container">
             <div class="row"><div class="col-sm-6"><form></form></div></div>
         </div>
+        <script type="text/javascript" src="/editor/dependencies/jsonform/deps/jquery-v3.5.1.min.js"></script>
+        <script type="text/javascript" src="/editor/dependencies/bootstrap/js/bootstrap-v4.5.3.min.js"></script>
         <script type="text/javascript" src="/editor/dependencies/jsonform/deps/underscore.js"></script>
         <script type="text/javascript" src="/editor/dependencies/jsonform/deps/opt/jsv.js"></script>
         <script type="text/javascript" src="/editor/dependencies/jsonform/lib/jsonform.js"></script>
-        <script type="text/javascript" src="/editor/lib/metadataeditor.js"></script>
+        <script type="text/javascript" src="/editor/dependencies/tabulator/js/tabulator.min.js"></script>
+        <script type="text/javascript" src="/editor/lib/js/metadataeditor.js"></script>
         <script>
             var dataModel = {
                 "type": "object",
