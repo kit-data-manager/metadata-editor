@@ -164,3 +164,7 @@ input:focus, textarea:focus, select:focus{
 #editor-buttons{
     margin-bottom: 25px;   
 }
+
+.error .jsonform-errortext{
+    color: var(--metadataeditor-red-dark) !important;
+}
