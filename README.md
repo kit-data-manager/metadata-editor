@@ -1,7 +1,7 @@
 Metadata Editor
 ===============
 
-The Metadata Editor is a JavaScript library allowing to generate web forms and validate metadata in an intuitive and generic way with the help of [JSON Form Library](https://github.com/jsonform/jsonform/wiki). Moreover, it enables to list various resources given by the user as a JSON object. In addition, the editor offers the possibility to the developer to add different icons in order to perform CRUD (Create, Read, Update, Delete) operations.
+The Metadata Editor is a JavaScript library allowing to generate web forms and validate metadata in an intuitive and generic way with the help of [JSON Form Library](https://github.com/jsonform/jsonform/wiki). Moreover, it enables to list various resources given by the user as a JSON object. In addition, the editor offers the possibility to the developer to add different icons in order to perform CRUD (Create, Read, Update, Delete) operations. In order to support the JSON Schema draft-2019-09, [Ajv JSON Schema Validator](https://ajv.js.org/) has been integrated in the JSON Form Library. 
 
 Objectives
 ----------
@@ -28,7 +28,7 @@ The developer can generate a table, that lists all given JSON resources. The “
 
 | Key                    | Description                                                      | Mandatory/Optional                    | Default Value |
 | ---------------------- | ---------------------------------------------------------------- |---------------------------------------|---------------|
-| dataModel              | represents a JSON schema, which describes the structure of the data model that must be created when the form is submitted. The JSON schema should follow the properties definition of [the JSON Schema specification](https://tools.ietf.org/html/draft-zyp-json-schema-04#section-5.2). | Mandatory |- |
+| dataModel              | represents a JSON schema, which describes the structure of the data model that must be created when the form is submitted. The JSON schema should follow the properties definition of the JSON Schema draft-2019-09 specification. | Mandatory |- |
 | uiForm                 | JSON user interface form, which describes the structure of the form layout. It should follow the properties definition specified in [the JSON Form library](https://github.com/jsonform/jsonform/wiki#fields)  . | Optional | "*" (Default form layout is generated) |
 | resource               | represents an array of JSON resources. | Mandatory (in case Read, Update or Delete operations should be performed)   |     - |
 | items                  | represents an array of JSON objects, which includes the table’s column definitions. Each JSON object should include the following keys:   *“title”: The title that will be displayed in the header for this column.   *“field”: This is the key for this column in the JSON resource. | Mandatory | -  |
