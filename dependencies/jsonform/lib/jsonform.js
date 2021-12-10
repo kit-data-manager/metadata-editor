@@ -22,7 +22,7 @@
  * dynamic by essence.
  */
 
-/*global window, Ï*/
+/*global window*/
 
 (function (serverside, global, $, _, JSON) {
     if (serverside && !_) {
@@ -852,8 +852,8 @@
         'array': {
             'template': '<div id="<%= id %>"><ul class="_jsonform-array-ul" style="list-style-type:none;"><%= children %></ul>' +
                     '<span class="_jsonform-array-buttons">' +
-                    '<a href="#" class="btn btn-default _jsonform-array-addmore"><i class="glyphicon glyphicon-plus-sign" title="Add new"></i></a> ' +
-                    '<a href="#" class="btn btn-default _jsonform-array-deletelast"><i class="glyphicon glyphicon-minus-sign" title="Delete last"></i></a>' +
+                    '<a href="#" class="btn btn-default _jsonform-array-addmore"><i class="icon-circle-arrow-right icon-large"></i> Add</a> ' +
+                    '<a href="#" class="btn btn-default _jsonform-array-deletelast"><i class="icon-circle-arrow-right icon-large"></i> Delete</a>' +
                     '</span>' +
                     '</div>',
             'fieldtemplate': true,
@@ -3457,13 +3457,13 @@
 
     formTree.prototype.validate = function (noErrorDisplay) {
         var values = jsonform.getFormValue(this.domRoot);
-        console.log("values", values);
         var errors = false;
         var schemaIsNotValid = false;
 
         var options = this.formDesc;
         if (options.validate !== false) {
             const ajv = new ajv7.default({strict: false, allErrors: true});
+
             try {
                 const validate = ajv.compile(this.formDesc.schema);
                 const valid = validate(values);
