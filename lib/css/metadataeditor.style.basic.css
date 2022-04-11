@@ -6,34 +6,15 @@
     --metadataeditor-white: #fff;
 }
 
-.btn, .btn:active {
-    color: var(--metadataeditor-white);
-    background: var(--metadataeditor-green-dark) !important;
-    text-decoration: none;
-    transition: all 0.4s;
-    line-height: normal;
-    border-radius: 30px;
-    margin-top: 10px;
-    padding: 10px 20px;
-    min-width: 150px;
-    border: none;
-}
-
-.btn:hover,.btn:focus {
-    background: var(--metadataeditor-green-light) !important;
-    outline: none;
-    color: var(--metadataeditor-white);
+.close{
+    position: fixed;
+    top: 10px !important;
+    right: 10px !important;
 }
 
 .tabulator {
-    margin-top: 50px;
-    margin-bottom: 20px;
-}
-
-.tabulator .tabulator-footer .tabulator-page.active {
-    border-color: var(--metadataeditor-green-dark) !important;
-    background-color: var(--metadataeditor-green-dark) !important;
-    color: var(--metadataeditor-white);
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* Modal Style */
@@ -55,9 +36,6 @@
 #failed-modal .modal-header, #alert-modal .modal-header {
     background: var(--metadataeditor-red-dark) !important;
 }
-#success-modal  .modal-header{
-    background: var(--metadataeditor-green-dark);
-}
 
 #failed-modal .icon-box, #success-modal .icon-box, #alert-modal .icon-box  {
     color: var(--metadataeditor-white);
@@ -76,11 +54,6 @@
     margin: -2px 0px 0px -2px;
 }
 
-.form-modal .modal-header{
-    background: var(--metadataeditor-green-light) !important;
-    color: var(--metadataeditor-white);
-}
-
 .text_center {
     text-align: center !important;
 }
@@ -88,10 +61,6 @@
 *:focus {
     outline:none !important;
     box-shadow: none!important;
-}
-
-input:focus, textarea:focus, select:focus{
-    border-color: var(--metadataeditor-green-dark) !important;
 }
 
 /* Hide the browser's default checkbox */
@@ -114,11 +83,6 @@ input:focus, textarea:focus, select:focus{
 /* On mouse-over, add a grey background color */
 .container:hover ~ .checkmark {
     background-color: #ccc;
-}
-
-/* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
-    background-color: var(--metadataeditor-green-light);
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -146,11 +110,6 @@ input:focus, textarea:focus, select:focus{
     transform: rotate(45deg);
 }
 
-.table-title{
-    margin-top: 20px;
-    color: var(--metadataeditor-green-dark);
-}
-
 .btn-failed, .btn-alert, .btn-failed:active, .btn-alert:active{
     background: var(--metadataeditor-red-dark) !important;
 }
@@ -171,9 +130,15 @@ input:focus, textarea:focus, select:focus{
 
 .form-group > label{
     font-weight: bold;
+    color: #245580 !important;
+    text-decoration: underline;
+    margin-left: -10px;
+    margin-bottom: 10px;
 }
 
 .form-group > legend{
     font-weight: bold;
-    font-size:1rem;
+    font-size:1.2rem;
 }
+
+

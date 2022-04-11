@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		
+        <title>Getting started with Metadata Editor</title>
+		<!--External dependencies-->
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/4.8.1/css/bootstrap/tabulator_bootstrap4.min.css" integrity="sha512-9OmhNGH2YU617sFF9McU/a7cOIcdc9A07MPkcO96kECTvrTwUrcQgBuiRtLi2NYK/M+JjHvoMpbQ03JU/zNXCg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/4.8.1/js/tabulator.min.js" integrity="sha512-h+yGnFHagbGI8FHZYG0qlJvQ2mUGnaGb9I8e+C9nzUnG8OAMgKdBAGreBTjRyrEi0YWseDj0dpwlW5Z+hTg3Fw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ajv/8.11.0/ajv2019.min.js" integrity="sha512-2eKme1Qc3D1JArscd5NVLW4niVDRuutDBHJmPhAoJNc8ZMD8Ynb0dow4fItVzEPb8EF9CCzT9hFyB85I6HJAjA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js" integrity="sha512-7fNh7OUGa7bdpmSQ81iNxgBywspNTxVxBxfbT1gSnQ124VGfksj3AR/QGhdYaO8ZLHBLSoaa+VsVDgw795eBaw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<!--Metadata Editor library-->
+		<script type="text/javascript" src="../../lib/js/metadataeditor.js"></script>
+		<script type="text/javascript" src="../../deps/jsonform/jsonform.js"></script>
+		<!--Input data-->
+        <script type="text/javascript" src="./schema.js"></script>
+		<script type="text/javascript" src="./ui-schema.js"></script>
+		<script type="text/javascript" src="./schema_movies.js"></script>
+		<script type="text/javascript" src="./ui-schema_movies.js"></script>
+		<script type="text/javascript" src="./data.js"></script>
+		<!--Basic stylesheet-->
+        <link rel="stylesheet" href="../../lib/css/metadataeditor.style.basic.css" />
+	</head>
+	
+    <body>
+		<div class="container">
+            <div class="col-12">
+                <div class="boxlist margin-top-30" id="training-box">
+                    <div class="box-header bg-green-blue">
+                        <h3 class="box-title">Enhanced Form Examples</h3>
+					</div>
+					<div class="panel-group" id="accordion">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+										<span id="oneSpan" class="glyphicon glyphicon-menu-right text-success"></span> The First Table            
+									</a>
+								</h4>
+							</div>
+							<div id="collapseOne" class="panel-collapse collapse in">
+								<div class="panel-body">
+									<p>After we've learned how to create a form for a single resource, we continue with handling multiple resource. In terms of the Metadata Editor this means, that we use a table first, to show all resources and show a certain form based on the selection within the table. Let's start with the table itself. The Metadata Editor makes use of the <i><b>Tabulator</b></i> library, which requires a certain amount of parameters in order to render an appropriate table. The first parameter object defines the table's colums:
+<pre>
+var columns = [
+	{title: "Given Name", field: "givenName", headerSort: false},
+	{title: "Family Name", field: "familyName", headerSort: false},
+	{title: "Age", field: "age", headerSort: false},
+	{title: "Gender", field: "gender", headerSort: false}
+];
+</pre>
+										As you can see, we are using the same schema as in our basic example. The next parameter object is used later on to configure the table's behaviour, e.g., its layout and pagination parameters:
+<pre>
+var tableConfig = {
+	layout: "fitColumns",
+	pagination: "local",
+	ajaxURL: "",
+	paginationSize: 10,
+	paginationSizeSelector: [3, 6, 8, 10, 15, 20]
+};
+</pre>		
+										Finally, all parameters are combined into one single parameter object as follows:
+<pre>
+var params = {
+	dataModel: dataModel,
+	uiForm: this.uiSchema,
+	items: columns,
+	tableLayout: tableConfig,
+	data: this.tableData,
+	readOperation: undefined},
+	updateOperation: undefined,
+	deleteOperation: undefined,
+	createOperation: undefined,
+	listOperation: undefined
+};
+</pre>
+										Here you can find form-specific parameters (dataModel, uiForm), which we ignore for the moment, table-specific parameters (items, tableLayout, data) and a list of callback functions, which we also skip for the moment. In order to render the table, we use the following call:
+<pre>
+$('#first-table').metadataeditorTable(params);
+</pre>
+										By doing this, the table is rendered at the element with id <i><b>first-table</b></i> in this HTML file.
+									</p>
+									<hr/>		
+									<div id="first-table"></div>	
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+										<span id="twoSpan" class="glyphicon glyphicon-menu-right text-info"></span> Including Callbacks and Editor Forms            
+									</a>
+								</h4>
+							</div>
+							<div id="collapseTwo" class="panel-collapse collapse">
+								<div class="panel-body">
+									<p>The table shown in the previous example was purely for visualization as we did not provide any callback. As soon as we add a callback function for any of the supported operations (read, update, delete, create, list), the according action button will be visible. In order to add a callback function to an operation, we have to modify the table parameters as follows:
+<pre>
+var params = {
+	dataModel: dataModel,
+	uiForm: this.uiSchema,
+	items: columns,
+	tableLayout: tableConfig,
+	data: this.tableData,
+	readOperation: (selection) => {
+		var options = {
+			operation: "READ",
+			dataModel: this.dataModel,
+			uiForm: this.uiSchema,
+			resource: selection,
+			buttonTitle: "Close"
+		};
+		$('#read-form').metadataeditorForm(options, () => {
+			$("#formModal").modal('hide');
+		});
+		$("#formModal").modal('show');
+	},
+	updateOperation: undefined,
+	deleteOperation: undefined,
+	createOperation: undefined,
+	listOperation: undefined
+};
+</pre>
+										The content of the callback function is very similar to what we did in the simple examples. There are only two differences: 
+										<ul>
+											<li>The form data is taken from the table selection instead of an external source</li>
+											<li>The form is not always visible but shown as model dialog on demand</li>
+										</ul>
+										For details on how to integrate the form as a modal dialog, please refer so the source of this file. To add the table with out read operation we finally have to call:
+<pre>
+$('#second-table').metadataeditorTable(params);
+</pre>
+										By doing this, the table is rendered at the element with id <i><b>second-table</b></i> in this HTML file. As you can see, each table column now contains an eye icon at the end, which will trigger the callback we've defined for the read operation.
+									</p>
+									<hr/>		
+									<div id="second-table"></div>	
+									<div class="modal fade form-modal" id="formModal" data-keyboard="false" data-backdrop="static">
+                						<div class="modal-dialog">
+                    						<div class="modal-content">
+                        						<div class="modal-header">
+                            						<h4>Person Form</h4>
+                            						<button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+                        						</div>
+                        						<div class="modal-body">
+                            						<form id="read-form"></form>
+                        						</div>
+                    						</div>
+                						</div>
+            						</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+										<span id="threeSpan" class="glyphicon glyphicon-menu-right text-info"></span> Remotely Fetching Data and Enhanced Styling            
+									</a>
+								</h4>
+							</div>
+							<div id="collapseThree" class="panel-collapse collapse">
+								<div class="panel-body">
+								    <p>With the last example in this section, let's come to something more complex and closer to reality. Typically, the Metadata Editor is supposed to serve as frontend to a Web-accessible service providing data and all operations to it. We will now show how to integrate data loading from a remote location including some more customized representation of the result. Therefor, we switch from showing persons to movies. Thus, we have to setup an entirely new table and we start with the column definition:
+<pre>
+var columnsMovies = [
+	{title: "", field: "image", headerSort: false, formatter:"image", formatterParams:{width:"50px"}, frozen:true, width: 70}, 
+	{title: "Title", field: "title", headerSort: false},
+	{title: "Release Date", field: "release_date", headerSort: false}
+];
+</pre>
+Looks quite similar to the first example, except the first column, which uses a special formatter and has a fixed size. As you can see, you have all possibilities offered by the Tabulator library to improve the user experience of your Metadata Editor-based UI. The next parameter object we have to change is the <i><b>tableConfig</b></i>. Instead of serving static data we now provide an <i><b>ajaxURL</b></i> from where the data will be fetched by Tabulator. Furthermore, we limit the page size to 6 and we provide a minimum height of the table, both only having optical impact.
+<pre>
+var tableConfigMovies = {
+	layout: "fitColumns",
+	pagination: "local",
+	ajaxURL: "https://ghibliapi.herokuapp.com/films",
+	paginationSize: 6,
+	minHeight: 300,
+	paginationSizeSelector: [3, 6, 8, 10, 15, 20]
+};
+</pre>
+Finally, we have to combine everything in a parameter object for the table. Most of what is shown below was already presented before, unless we are now using different properties for dealing with movies instead of persons. The only thing worth mentioning here is, that we are not limited to the form element for using the resource selected in the table, but we can also use single elements, i.e., the image property in this case, on other UI elements easily.  
+
+<pre>
+var paramsMovies = {
+	dataModel: this.dataModelMovies,
+	uiForm: this.uiSchemaMovies,
+	items: columnsMovies,
+	tableLayout: tableConfigMovies,
+	readOperation: (selection) => {
+		var optionsMovies = {
+			operation: "READ",
+			dataModel: this.dataModelMovies,
+			uiForm: this.uiSchemaMovies,
+			resource: selection,
+			buttonTitle: "Close"
+		};
+		$("#titleImage").attr("src", selection.image);
+		$('#movie-form').metadataeditorForm(optionsMovies, (value) => {
+			var resource = optionsMovies.resource;
+			JSON.parse(JSON.stringify(resource));
+			console.log(resource);
+			$("#formModalMovies").modal('hide');
+		});
+		$("#formModalMovies").modal('show');
+	},
+	updateOperation: undefined,
+	deleteOperation: undefined,
+	createOperation: undefined,
+	listOperation: undefined
+};
+</pre>
+That's it, after calling the following line we see what we achieved.
+<pre>
+$('#third-table').metadataeditorTable(paramsMovies);
+</pre>
+									</p>
+									<hr/>	
+								
+									<div id="third-table"></div>
+									<div class="modal fade form-modal" id="formModalMovies" data-keyboard="false" data-backdrop="static">
+                						<div class="modal-dialog">
+                    						<div class="modal-content">
+                        						<div class="modal-header">
+                            						<h4>Movie Form</h4>
+                            						<button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+                        						</div>
+                        						<div class="modal-body">
+													<img id="titleImage" style="width:100px; margin-bottom:20px;"></img>
+                            						<form id="movie-form"></form>
+                        						</div>
+                    						</div>
+                						</div>
+            						</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<script>
+			
+			$('#accordion').on('show.bs.collapse', function (element) {
+				var id = '#' + element.target.id.replace('collapse','').toLowerCase() + 'Span';
+				$(id).addClass("glyphicon-menu-down");
+			});
+			$('#accordion').on('hidden.bs.collapse', function (element) {
+				var id = '#' + element.target.id.replace('collapse','').toLowerCase() + 'Span';
+				$(id).removeClass("glyphicon-menu-down");
+			});
+			
+			resolveRefs(dataModel, dataModel.$defs);
+			
+			//First table preparation
+			var columns = [
+				{title: "Given Name", field: "givenName", headerSort: false},
+				{title: "Family Name", field: "familyName", headerSort: false},
+				{title: "Age", field: "age", headerSort: false},
+				{title: "Gender", field: "gender", headerSort: false}
+			];
+			
+			var tableConfig = {
+				layout: "fitColumns",
+				pagination: "local",
+				ajaxURL: "",
+				paginationSize: 10,
+				paginationSizeSelector: [3, 6, 8, 10, 15, 20]
+			};
+			
+			var params = {
+                dataModel: this.dataModel,
+                uiForm: this.uiSchema,
+                items: columns,
+                tableLayout: tableConfig,
+				data: this.tableData,
+                readOperation: undefined,
+                updateOperation: undefined,
+                deleteOperation: undefined,
+                createOperation: undefined,
+                listOperation: undefined
+			};
+			
+            $('#first-table').metadataeditorTable(params);
+			//Second table preparation
+			var params1 = {
+				dataModel: this.dataModel,
+				uiForm: this.uiSchema,
+				items: columns,
+				tableLayout: tableConfig,
+				data: this.tableData,
+				readOperation: (selection) => {
+					var options1 = {
+						operation: "READ",
+						dataModel: this.dataModel,
+						uiForm: this.uiSchema,
+						resource: selection,
+						buttonTitle: "Close"
+					};
+					$('#read-form').metadataeditorForm(options1, () => {
+						$("#formModal").modal('hide');
+					});
+					$("#formModal").modal('show');
+				},
+				updateOperation: undefined,
+				deleteOperation: undefined,
+				createOperation: undefined,
+				listOperation: undefined
+			};
+            $('#second-table').metadataeditorTable(params1);
+			//Third table preparation
+ 			var columnsMovies = [{title: "", field: "image", headerSort: false, formatter:"image", formatterParams:{width:"50px"}, frozen:true, width: 70}, 
+                        {title: "Title", field: "title", headerSort: false},
+                        {title: "Release Date", field: "release_date", headerSort: false}
+            ];
+			 
+			var tableConfigMovies = {
+				layout: "fitColumns",
+				pagination: "local",
+				ajaxURL: "https://ghibliapi.herokuapp.com/films",
+				paginationSize: 6,
+				minHeight: 300,
+				paginationSizeSelector: [3, 6, 8, 10, 15, 20],
+			};
+
+			
+			var paramsMovies = {
+				dataModel: this.dataModelMovies,
+				uiForm: this.uiSchemaMovies,
+				items: columnsMovies,
+				tableLayout: tableConfigMovies,
+				readOperation: (selection) => {
+					var optionsMovies = {
+                		operation: "READ",
+                		dataModel: this.dataModelMovies,
+                		uiForm: this.uiSchemaMovies,
+                		resource: selection,
+                		buttonTitle: "Close"
+             		};
+                    $("#titleImage").attr("src", selection.image);
+                    $('#movie-form').metadataeditorForm(optionsMovies, (value) => {
+                    	var resource = optionsMovies.resource;
+                        JSON.parse(JSON.stringify(resource));
+                        console.log(resource);
+                        $("#formModalMovies").modal('hide');
+                    	}
+                    );
+                    $("#formModalMovies").modal('show');
+				},
+				updateOperation: undefined,
+				deleteOperation: undefined,
+				createOperation: undefined,
+				listOperation: undefined
+			};
+	
+			$('#third-table').metadataeditorTable(paramsMovies);
+		</script>
+	</body>
+</html>

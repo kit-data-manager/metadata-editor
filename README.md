@@ -1,7 +1,7 @@
 Metadata Editor
 ===============
 
-The Metadata Editor is a JavaScript library allowing to generate web forms and validate metadata in an intuitive and generic way with the help of [JSON Form Library](https://github.com/jsonform/jsonform/wiki). Moreover, it enables to list various resources given by the user as a JSON object. In addition, the editor offers the possibility to the developer to add different icons in order to perform CRUD (Create, Read, Update, Delete) operations. In order to support the JSON Schema draft-2019-09, [Ajv JSON Schema Validator](https://ajv.js.org/) has been integrated in the JSON Form Library. 
+The Metadata Editor is a JavaScript library allowing to generate web forms and validate metadata in an intuitive and generic way with the help of [JSON Form Library](https://github.com/jsonform/jsonform/wiki). Moreover, it enables to list various resources given by the user as a JSON object or fetched from a remote service making use of the [Tabulator Library](http://tabulator.info/). To interact with the data, different operations can be optionally defined and associated with callback functions. In order to support newer JSON schema specifications, [Ajv JSON Schema Validator](https://ajv.js.org/) has been integrated in the JSON Form Library. 
 
 Objectives
 ----------
@@ -13,250 +13,155 @@ Objectives
 Dependencies
 ------------
 
-The developer should add the editor as a library (JS files) in his project. The editor library contains 2 folders:
-- “dependencies”, which contains the JSON form dependencies, the “fontawesome” library, which enables the creation of different icons, and the “tabulator” library for the generation of tables.
-- “lib”, which contains the main JS file of the library and CSS files used for the style of the editor.
+For using the Metadata Editor, different dependencies must be added depending on the envisioned use case. In any case, three dependecies are required:
+
+* lib/js/metadataeditor.js
+* lib/css/metadataeditor.style.basic.css
+* deps/jsonform/jsonform.js
+
+The Metadata Editor comes with a slightly adapted version of the JSON Form Library, currently based on version 2.2.5. In comparison to the official release, our custom version used the Ajv library for schema validation as this library supports more recent specification versions than JSV, which is the default library used by JSON Schema Form.  
+
+In addition, if you just want to render a single form for a given resource, you will need:
+
+| Dependency             | Version |
+|------------------------|---------|
+| JQuery JS              | 3.5.1   |
+| Bootstrap CSS          | 3.3.7   |
+| Bootstrap-Theme CSS    | 3.3.7   |
+| Bootstrap JS           | 3.3.7   |
+| Font-Awesome CSS       | 6.1.1   |
+| Ajv 2019 JS            | 8.11.0  |
+| Ajv 2020 JS (Optional) | 8.11.0  |
+| Underscore JS          | 1.8.3   |
+
+Regarding Ajv you an choose which versions you want to include based on the JSON schema specification you are planning to use. However, especially for schema draft 2020-12 there is only limited support by JSON Schema Form, which is why this dependecy is markes as optional.
+
+In case you also want to show listings of multiple resources, you'll additionally need the following Tabulator dependencies:
+
+| Dependency               | Version |
+|--------------------------|---------|
+| Tabulator Bootstrap4 CSS | 4.8.1   |
+| Tabulator JS             | 4.8.1   |
+
+All external dependencies can be included from external providers and are therefore not part of this repository. 
+Please refer to the examples in the `examples` folder to find out from where to include a certain dependency.
 
 Getting started
 ---------------
 
-The metadata Editor offers the possibility to generate web forms and list JSON resources. How can the developer generate them and which inputs should be given? This will be explained in details in the next subsections.
+A good start on how to use the Metadata Editor can be found in the `examples` folder. Here you find simple examples, i.e., on how to work with single forms, but also complex examples, i.e. how to list resources using the Tabulator library.
 
-1. List JSON resources:
+In principle, everything evolves around two main functions:
 
-The developer can generate a table, that lists all given JSON resources. The “Tabulator” library is used in order to generate the table. The developer has to call the method “metadataeditorTable()”, which takes as a parameter a JSON object. The object should contain different keys and values that are described in the following table.
+* metadataeditorTable() 
+* metadataeditorForm()
 
-| Key                    | Description                                                      | Mandatory/Optional                    | Default Value |
-| ---------------------- | ---------------------------------------------------------------- |---------------------------------------|---------------|
-| dataModel              | represents a JSON schema, which describes the structure of the data model that must be created when the form is submitted. The JSON schema should follow the properties definition of the JSON Schema draft-2019-09 specification. | Mandatory |- |
-| uiForm                 | JSON user interface form, which describes the structure of the form layout. It should follow the properties definition specified in [the JSON Form library](https://github.com/jsonform/jsonform/wiki#fields)  . | Optional | "*" (Default form layout is generated) |
-| resource               | represents an array of JSON resources. | Mandatory (in case Read, Update or Delete operations should be performed)   |     - |
-| items                  | represents an array of JSON objects, which includes the table’s column definitions. Each JSON object should include the following keys:   *“title”: The title that will be displayed in the header for this column.   *“field”: This is the key for this column in the JSON resource. | Mandatory | -  |
-| readOperation(value)   | is a callback function. The “value” attribute contains the JSON resource of the appropriate row, already selected by the user. The implementation of this method is project-specific and should be performed when the user clicks on the eye icon. In case the developer does not give this callback function, the eye icon will not be shown. | Optional | |
-| editOperation(value)   | is a callback function. The “value” attribute contains the JSON resource of the appropriate row, already selected by the user. The implementation of this method is project-specific and should be performed when the user clicks on the edit icon. In case the developer does not give this callback function, the edit icon will not be shown. | Optional|  |
-| deleteOperation(value) | is a callback function. The “value” attribute contains the JSON resource of the appropriate row, already selected by the user. The implementation of this method is project-specific and should be performed when the user clicks on the trash icon. In case the developer does not give this callback function, the trash icon will not be shown. | Optional | |
-| listOperation(value) | is a callback function. The “value” attribute contains the JSON resource of the appropriate row, already selected by the user. The implementation of this method is project-specific and should be performed when the user clicks on the list icon. In case the developer does not give this callback function, the list icon will not be shown. This function is supposed to be performed in case the JSON resource contains in turn a list of other JSON objects. | Optional | |
-| createOperation()      | represents a JSON Object, which include the two keys: * “callback”: This describes the callback function, which will be executed only when the user clicks on the Create button. In case the developer does not give this callback function, the create button will not be shown. *”buttonTitle”: This describes the button Name. The default value is “Create”.  |Optional |  |
+Both take a rather big number of arguments, which we want to explain in the following. 
 
-1.1 Example
+1. metadataeditorTable() 
 
-Below you can find an example how the library can be used, in case the user wants to generate a table and list JSON resources. In order to  display the table, the developer has to add a table tag as you can see in the example.
+In one of the enhanced examples, the following parameter object if provided to `metadataeditorTable()`:
 
-```html
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Getting started with Metadata Editor</title>
-
-        <link rel="stylesheet" style="text/css" href="/editor/dependencies/fontawesome/css/all.css" />
-        <link href="/editor/dependencies/tabulator/css/tabulator_bootstrap4.min.css" rel="stylesheet">
-        <link rel="stylesheet" style="text/css" href="/editor/dependencies/jsonform/deps/opt/bootstrap-v4.5.2.css"/>
-        <link rel="stylesheet" style="text/css" href="/editor/lib/css/metadataeditor.style.default.css" />
-    </head>
-
-    <body>
-        <div class="container">
-            <div class="col-12">
-                <div class="boxlist margin-top-30" id="training-box">
-                    <div class="box-header bg-green-blue">
-                        <h4 class="box-title">Table Example</h4>
-                    </div>
-                    <div class="box-body"><div id="table"></div></div>
-                </div>
-            </div>
-        </div>
-        <script type="text/javascript" src="/editor/dependencies/jsonform/deps/jquery-v3.5.1.min.js"></script>
-        <script type="text/javascript" src="/editor/dependencies/bootstrap/js/bootstrap-v4.5.3.min.js"></script>
-        <script type="text/javascript" src="/editor/dependencies/jsonform/deps/underscore.js"></script>
-        <script type="text/javascript" src="/editor/dependencies/jsonform/deps/opt/jsv.js"></script>
-        <script type="text/javascript" src="/editor/dependencies/jsonform/lib/jsonform.js"></script>
-        <script type="text/javascript" src="/editor/dependencies/tabulator/js/tabulator.min.js"></script>
-        <script type="text/javascript" src="/editor/lib/js/metadataeditor.js"></script>
-        <script>
-            var dataModel = {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "title": "id"
-                    },
-                    "description": {
-                        "type": "string",
-                        "title": "description"
-                    }
-                }
-            }
-            var items = [{title: "Identifier", field: "id", headerSort: false},
-                {title: "Description", field: "description", headerSort: false}
+```
+var columnsMovies = [{title: "", field: "image", headerSort: false, formatter:"image", formatterParams:{width:"50px"}, frozen:true, width: 70}, 
+                        {title: "Title", field: "title", headerSort: false},
+                        {title: "Release Date", field: "release_date", headerSort: false}
             ];
-            var resource = [
-                {
-                    "id": "1134-f53-67tr",
-                    "description": "1st collection",
-                },
-                {
-                    "id": "1104-fg73-zo92",
-                    "description": "2nd colelction",
-                }
-            ]
-
-            var inputs = {dataModel: dataModel, uiForm: "*", resource: resource, items: items, 
-            readOperation: function (rowColumnvalue){
-                //project-specific implementation.
-                //rowColumnvalue is the appropriate JSON value and can be used by the developer.
-            },
-            updateOperation: function (rowColumnvalue){
-                //project-specific implementation.
-                //rowColumnvalue is the appropriate JSON value and can be used by the developer.
-            },
-            deleteOperation: function (rowColumnvalue){
-                //project-specific implementation.
-                //rowColumnvalue is the appropriate JSON value and can be used by the developer.
-            },
-            createOperation: { callback: function (){
-                //project-specific implementation.
-            }, buttonTitle: "Name of the Create button"},
-            
-            listOperation: function(rowColumnvalue){
-                //project-specific implementation.
-            }
-            };
-
-            $('#table').metadataeditorTable(inputs);
-        </script>
-    </body>
-</html>
+var tableConfigMovies = {
+				layout: "fitColumns",
+				pagination: "local",
+				ajaxURL: "https://ghibliapi.herokuapp.com/films",
+				paginationSize: 6,
+				minHeight: 300,
+				paginationSizeSelector: [3, 6, 8, 10, 15, 20],
+			}; 
+var paramsMovies = {
+				dataModel: this.dataModelMovies,
+				uiForm: this.uiSchemaMovies,
+				items: columnsMovies,
+				tableLayout: tableConfigMovies,
+				readIcon: 'fa fa-eye',
+				editIcon: 'fa fa-edit',
+				deleteIcon: 'fa fa-trash',
+				listIcon: 'fa fa-list',
+				readOperation: (selection) => {
+					var optionsMovies = {
+                		operation: "READ",
+                		dataModel: this.dataModelMovies,
+                		uiForm: this.uiSchemaMovies,
+                		resource: selection,
+                		buttonTitle: "Close"
+             		};
+                    $("#titleImage").attr("src", selection.image);
+                    $('#movie-form').metadataeditorForm(optionsMovies, (value) => {
+                    	var resource = optionsMovies.resource;
+                        JSON.parse(JSON.stringify(resource));
+                        console.log(resource);
+                        $("#formModalMovies").modal('hide');
+                    	}
+                    );
+                    $("#formModalMovies").modal('show');
+				},
+				updateOperation: undefined,
+				deleteOperation: undefined,
+				createOperation: undefined,
+				listOperation: undefined
+			};
 ```
 
-2. Generate Form:
-    
-In addition to the generation of the table, the library enables to generate web forms based on given JSON schemas. It allows adding, modifying or deleting metadata. Moreover, a validation of user-provided metadata is supported by the library. In order to generate a form, “metadataeditorForm()” method should be called. The method should contain the following attributes:
+Those arguments have the following name, description, obligation, and defaults:
 
-* “options”: a JSON variable which should include the following keys:
-
-1. operation (Mandatory): the name of the operation, which should be executed. It can be “CREATE”, “DELETE” or “UPDATE”. If operation “CREATE” is chosen, then an empty HTML form will be generated. Otherwise, if operation "UPDATE" or "DELETE" is chosen, a form, filled with the given values, will be generated. If the “DELETE” operation is chosen, the fields will be shown as readOnly so that the user cannot change their content. To implement this feature, the JSON Form library has been extended.
-2. dataModel (Mandatory): a JSON data model, which describes the structure of JSON data.
-
-3. uiForm (Optional): the JSON user interface form, which describes the structure of the form layout. In case it is not given, a default form layout will be generated.
-
-4. resource: a JSON resource used to initialize the generated form. This attribute is Mandatory in case the operation is “UPDATE” or “DELETE”.
-        
-* onSubmitValid(value): a Callback function. If the function was correctly executed, the “value” variable will include the result, which is a validated JSON resource. Otherwise, an exception will be thrown.
-
-2.1 Example
-
-Below you can find an example how can the library be used in case of form generation. In order to display the form, the developer has to  add  the form tag as you can see in the example.
-
-```html
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Getting started with Metadata Editor</title>
-
-        <link rel="stylesheet" style="text/css" href="/editor/dependencies/fontawesome/css/all.css" />
-        <link href="/editor/dependencies/tabulator/css/tabulator_bootstrap4.min.css" rel="stylesheet">
-        <link rel="stylesheet" style="text/css" href="/editor/dependencies/jsonform/deps/opt/bootstrap-v4.5.2.css"/>
-        <link rel="stylesheet" style="text/css" href="/editor/lib/css/metadataeditor.style.default.css" />
-    </head>
-
-    <body>
-        <div class="container">
-            <div class="row"><div class="col-sm-6"><form></form></div></div>
-        </div>
-        <script type="text/javascript" src="/editor/dependencies/jsonform/deps/jquery-v3.5.1.min.js"></script>
-        <script type="text/javascript" src="/editor/dependencies/bootstrap/js/bootstrap-v4.5.3.min.js"></script>
-        <script type="text/javascript" src="/editor/dependencies/jsonform/deps/underscore.js"></script>
-        <script type="text/javascript" src="/editor/dependencies/jsonform/deps/opt/jsv.js"></script>
-        <script type="text/javascript" src="/editor/dependencies/jsonform/lib/jsonform.js"></script>
-        <script type="text/javascript" src="/editor/dependencies/tabulator/js/tabulator.min.js"></script>
-        <script type="text/javascript" src="/editor/lib/js/metadataeditor.js"></script>
-        <script>
-            var dataModel = {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "title": "id"
-                    },
-                    "description": {
-                        "type": "string",
-                        "title": "description"
-                    }
-                }
-            }
-            var resource = [
-                {
-                    "id": "1134-f53-67tr",
-                    "description": "1st collection",
-                },
-                {
-                    "id": "1104-fg73-zo92",
-                    "description": "2nd colelction",
-                }
-            ]
-
-            var options = {operation: "CREATE", dataModel: dataModel, uiForm: "*"};
-
-            $('#form').metadataeditorForm(options, function onSubmitValid(value) {
-                //project-specific implementation.
-                //value is the appropriate JSON value and can be used by the developer.
-            });
-            
-            options = {operation: "UPDATE", dataModel: dataModel, uiForm: "*", resource: resource};
-
-            $('#form').metadataeditorForm(options, function onSubmitValid(value) {
-                //project-specific implementation.
-                //value is the appropriate JSON value and can be used by the developer.
-            });
-
-            options = {operation: "DELETE", dataModel: dataModel, uiForm: "*", resource: resource};
-
-            $('#form').metadataeditorForm(options, function onSubmitValid(value) {
-                //project-specific implementation.
-                //value is the appropriate JSON value and can be used by the developer.
-            });
-        </script>
-    </body>
-</html>
-```
-
-3. Management of the Metadata Editor style:
-
-The metadata editor library gives the possibility to the developer to manage the style of the user interface. It enables to manage the style of the icons, the table or also to generate modal windows. This will be described in the next subsections.
-
-3.1 Icons Style:
-
-The developer can create icons and add them to the inputs of the “metadataeditorTable()” function as a JSON object. The icons should be created with the help of [the “fontawesome” library](https://fontawesome.com/) and can be added to the inputs as below:
 
 | Key                    | Description                                                      | Mandatory/Optional                    | Default Value |
 | ---------------------- | ---------------------------------------------------------------- |---------------------------------------|---------------|
-| readIcon               | represents the Font awesome class name of the icon, which enables the creation of the eye icon. In case the user clicks on this icon, the readOperation() will be performed. | Optional |'fa fa-eye' |
-| editIcon               | represents the Font awesome class name of the icon, which enables the creation of the edit icon. In case the user clicks on this icon, the updateOperation() will be performed. | Optional |'fa fa-edit' |
-| deleteIcon             | represents the Font awesome class name of the icon, which enables the creation of the trash icon. In case the user clicks on this icon, the deleteOperation() will be performed. | Optional |'fa fa-trash' |
-| listIcon               | represents the Font awesome class name of the icon, which enables the creation of the list icon. In case the user clicks on this icon, the listOperation() will be performed. | Optional |'fa fa-list' |
+| dataModel              | Represents a JSON schema, which describes the JSON schema used to render an editor form. The JSON schema should follow the properties definition of the JSON Schema draft-2019-09 specification. | Mandatory |- |
+| uiForm                 | JSON user interface form, which describes the structure of the form layout. It should follow the properties definition specified in [the JSON Form library](https://github.com/jsonform/jsonform/wiki#fields). | Optional | "*" (Default form layout is generated) |
+| data                   | Represents an array of JSON resources used to fill the table if not loaded from a remote location. | Mandatory if resources are not loaded remotely  |- |
+| items                  | Represents an array of JSON objects, which define the table’s columns. Each JSON object should include a `title` property, which will be the caption of the according column, and a `key` property, defining the property according to the `dataModel` which is used as value for the column. Please refer to the [Column Setup](http://tabulator.info/docs/5.1/columns) section of the Tabulator documentation.| Mandatory | -  |
+| tableLayout            | Parameters for the Tabulator library defining the table properties. Please refer to [the tabulator specification](http://tabulator.info/docs/4.0/layout) for details.| Optional | - |
+| readIcon               | The Font awesome class name shown in the cell triggering the read operation. | Optional | 'fa fa-eye' |
+| editIcon               | The Font awesome class name shown in the cell triggering the edit operation. | Optional | 'fa fa-edit' |
+| deleteIcon             | The Font awesome class name shown in the cell triggering the delete operation. | Optional | 'fa fa-trash' |
+| listIcon               | The Font awesome class name shown in the cell triggering the list operation. | Optional | 'fa fa-list' |
+| readOperation(value)   | Takes a callback function. The “value” argument holds the JSON resource of the selected row. The implementation of this method is project-specific and is triggered when the user clicks on the read icon, i.e., the 'eye'. In case the developer does not give this callback function, the read icon will not be shown. | Optional |- |
+| editOperation(value)   | Takes a callback function. The “value” argument holds the JSON resource of the selected row. The implementation of this method is project-specific and is triggered when the user clicks on the edit icon, i.e., the 'pen'. In case the developer does not give this callback function, the read icon will not be shown. | Optional|-  |
+| deleteOperation(value) | Takes a callback function. The “value” argument holds the JSON resource of the selected row. The implementation of this method is project-specific and is triggered when the user clicks on the delete icon, i.e., the 'trash bin'. In case the developer does not give this callback function, the delete icon will not be shown. | Optional|-  |
+| listOperation(value) | Takes a callback function. The “value” argument holds the JSON resource of the selected row. The implementation of this method is project-specific and is triggered when the user clicks on the list icon, i.e., the 'element list'. In case the developer does not give this callback function, the list icon will not be shown. | Optional|-  |
+| createOperation()      | Takes a JSON Object, which include the two properties: * “callback”: This denotes the callback function, which will be triggered  when the user clicks on the Create button. In case the developer does not provide this callback function, the create button will not be shown. *”buttonTitle”: This defines the button label. The default value is “Create”.  |Optional | "Create"  |
 
-3.2 Table Style:
+2. metadataeditorForm()
 
-The developer has the possibility to customize the layout of the table. As the generation of the table is made with the help of the tabulator library, its configuration should follow [the tabulator specification](http://tabulator.info/docs/4.0/layout).
-The layout can be given as a JSON object, which should be added to the inputs described in Section 1. The object should have the key “tableLayout”. In case it is not given, then a default table layout is assigned, which have the following value:
+In one of the simple examples, the following parameter object if provided to `metadataeditorForm()`:
 
-```html
-{
-    layout: "fitColumns",
-    height: "100%",
-    paginationSize: 10,
-    pagination: "local",
-    placeholder: "No Data Set"
-};
 ```
+var options = {
+		operation: "READ",
+		dataModel: this.dataModel,
+		uiForm: this.uiSchema,
+		resource: this.resource,
+		buttonTitle: "OK"
+	};
+	
+$('#with-data').metadataeditorForm(options, () => {});
+```
+
+The options object provides basic properties, which have the following name, description, obligation, and defaults:
+
+| Key                    | Description                                                      | Mandatory/Optional                    | Default Value |
+| ---------------------- | ---------------------------------------------------------------- |---------------------------------------|---------------|
+| operation              | The operation the form should be responsible to perform. Valid operations are `CREATE`, `READ`, `UPDATE`, and `DELETE`. `READ`, `UPDATE`, and `DELETE` operations require the resource parameter to be provided, `CREATE` will start off with an empty form. Furthermore, in case of `DELETE` forms all fields will be read-only.| Mandatory |- |
+| dataModel              | The JSON schema used to obtain the fields in the form. | Mandatory |- |
+| uiForm                 | JSON object defining the layout of the resulting form. For details, please refer to the [Reference Documentation](https://github.com/jsonform/jsonform/wiki) of the JSON Form Library. | Optional |- |
+| resource               | A resource following `dataModel`, which is used to pre-fill the fields of the resulting form. | Optional only for `CREATE` operation, Mandatory otherwise |- |
+| buttonTitle            | The title of the submit button. If no title is provided, either the operation name will be used (`CREATE`,`UPDATE`, and `DELETE`) or no button will be rendered (`READ`)  | Optional | Operation name or none |
+
+Furthermore, a callback is provided to `metadataeditorForm()` which takes a single parameter representing the resulting JSON resource. In case of `CREATE`, `UPDATE`, and `DELETE` operations, the JSON resource representing the form content is returned, for a `READ` operation nothing is returned.
 
 3.3 Generation of Modals:
 
-The Metadata editor enables the developer to generate modal windows with the help of the Bootstrap library. Two modal types are supported: success and failed. The “success” modal can be generated in case an operation is successfully executed. Otherwise, the “failed” modal can be generated. For that, the function “showModal(modalType, message, link)” should be called. The function has three mandatory inputs, which are:
+The Metadata editor enables the developer to generate modal windows with the help of the Bootstrap library. Two modal types are supported: `success` and `failed`. The `success` modal can be generated in case an operation is successfully executed. Otherwise, the `failed` modal may be generated. For that, the function `showModal(modalType, message, link)` can be used. The function has three mandatory inputs, which are:
 
-•	modalType: represents the modal type. It can be “SUCCESS” or “FAILED”.
+•	modalType: represents the modal type. It can be `SUCCESS` or `FAILED`.
 
 •	Message: represents the message, which should be shown in the modal body.
 
