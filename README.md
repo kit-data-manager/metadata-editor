@@ -19,7 +19,7 @@ For using the Metadata Editor, different dependencies must be added depending on
 * lib/css/metadataeditor.style.basic.css
 * deps/jsonform/jsonform.js
 
-The Metadata Editor comes with a slightly adapted version of the JSON Form Library, currently based on version 2.2.5. In comparison to the official release, our custom version used the Ajv library for schema validation as this library supports more recent specification versions than JSV, which is the default library used by JSON Schema Form.  
+The Metadata Editor comes with a slightly adapted version of the JSON Form Library, currently based on version 2.2.5. In comparison to the official release, the custom version used the [Ajv JSON Schema Validator](https://ajv.js.org/) for schema validation as this library supports more recent specification versions than JSV, which is the default library used by JSON Schema Form.  
 
 In addition, if you just want to render a single form for a given resource, you will need:
 
@@ -30,11 +30,12 @@ In addition, if you just want to render a single form for a given resource, you 
 | Bootstrap-Theme CSS    | 3.3.7   |
 | Bootstrap JS           | 3.3.7   |
 | Font-Awesome CSS       | 6.1.1   |
+| Ajv 7 JS               | 8.11.0  |
 | Ajv 2019 JS            | 8.11.0  |
 | Ajv 2020 JS (Optional) | 8.11.0  |
 | Underscore JS          | 1.8.3   |
 
-Regarding Ajv you an choose which versions you want to include based on the JSON schema specification you are planning to use. However, especially for schema draft 2020-12 there is only limited support by JSON Schema Form, which is why this dependecy is markes as optional.
+Regarding Ajv you an choose which versions you want to include based on the JSON schema specification you are planning to use. However, especially for schema draft 2020-12 there is only limited support by JSON Schema Form, which is why this dependecy is markes as optional. The default validation, which is used if $schema is not defined or is not 2019-09 or 2020-12, is based on schema specification draft-07. Thus, Ajv 7 should at least been included to avoid runtime errors.
 
 In case you also want to show listings of multiple resources, you'll additionally need the following Tabulator dependencies:
 
@@ -51,12 +52,20 @@ Getting started
 
 A good start on how to use the Metadata Editor can be found in the `examples` folder. Here you find simple examples, i.e., on how to work with single forms, but also complex examples, i.e. how to list resources using the Tabulator library.
 
-In principle, everything evolves around two main functions:
+In principle, everything evolves around three main functions:
 
+* initializeModals()
 * metadataeditorTable() 
 * metadataeditorForm()
 
-Both take a rather big number of arguments, which we want to explain in the following. 
+`initializeModals()` must be called first. It will add three different modal dialogs to the page, which are used in callbacks of the Metadata Editor, e.g., to inform the user on errors or success.
+The only thing you have to do is adding the following line once in your script before you continue with creating forms:
+
+```
+$('body').initializeModals();
+```
+
+The later two take a rather big number of arguments, which we want to explain in the following. 
 
 1. metadataeditorTable() 
 

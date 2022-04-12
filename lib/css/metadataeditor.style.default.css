@@ -30,6 +30,11 @@
     margin-bottom: 20px;
 }
 
+/*Fix for broken scrolling after closing second modal*/
+.modal { 
+    overflow-y: auto;
+}
+
 .tabulator .tabulator-footer .tabulator-page.active {
     border-color: var(--metadataeditor-green-dark) !important;
     background-color: var(--metadataeditor-green-dark) !important;

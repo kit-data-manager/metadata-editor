@@ -11,6 +11,10 @@
     top: 10px !important;
     right: 10px !important;
 }
+/*Fix for broken scrolling after closing second modal*/
+.modal { 
+    overflow-y: auto;
+}
 
 .tabulator {
     margin-top: 10px;

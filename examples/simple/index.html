@@ -12,6 +12,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/ajv/8.11.0/ajv2019.min.js" integrity="sha512-2eKme1Qc3D1JArscd5NVLW4niVDRuutDBHJmPhAoJNc8ZMD8Ynb0dow4fItVzEPb8EF9CCzT9hFyB85I6HJAjA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ajv/8.11.0/ajv7.min.js" integrity="sha512-NGcX0dMSiOACZ7t7BKTSSoL2vnVKAp5mG+M8gK1vZQGwJtzbLQba1eniSXdez+WfDtcrxBUEo143DV297oAnbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js" integrity="sha512-7fNh7OUGa7bdpmSQ81iNxgBywspNTxVxBxfbT1gSnQ124VGfksj3AR/QGhdYaO8ZLHBLSoaa+VsVDgw795eBaw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<!--Metadata Editor library-->
 		<script type="text/javascript" src="../../deps/jsonform/jsonform.js"></script>
@@ -141,7 +142,7 @@ $('#with-data').metadataeditorForm(options, () => {});</pre>
 
 
 <script>
-	
+		$('body').initializeModals();
 		$('#accordion').on('show.bs.collapse', function (element) {
 		var id = '#' + element.target.id.replace('collapse','').toLowerCase() + 'Span';
 		$(id).addClass("glyphicon-menu-down");
@@ -161,6 +162,7 @@ $('#with-data').metadataeditorForm(options, () => {});</pre>
 		var resource = value;
 		JSON.parse(JSON.stringify(resource));
 		console.log(resource);
+		alert(resource);
 	});
 	var options = {
 		operation: "CREATE",
@@ -172,6 +174,7 @@ $('#with-data').metadataeditorForm(options, () => {});</pre>
 		var resource = value;
 		JSON.parse(JSON.stringify(resource));
 		console.log(resource);
+		alert(resource);
 	});
 	var options = {
 		operation: "READ",
