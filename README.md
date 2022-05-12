@@ -1,3 +1,6 @@
+[![NPM Version](https://img.shields.io/npm/v/@kit-data-manager/metadata-editor)](https://img.shields.io/npm/v/@kit-data-manager/metadata-editor)
+[![](https://data.jsdelivr.com/v1/package/npm/@kit-data-manager/metadata-editor/badge)](https://www.jsdelivr.com/package/npm/@kit-data-manager/metadata-editor)
+
 Metadata Editor
 ===============
 
