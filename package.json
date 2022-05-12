@@ -1,7 +1,7 @@
 {
   "name": "metadata-editor",
-  "version": "1.0.0-snapshot",
-  "main": "./lib/metadataeditor.js",
+  "version": "0.9.0",
+  "main": "./lib/js/metadataeditor.js",
   "description": "JavaScript library allowing to generate web forms and validate metadata using JSON schemas.",
   "keywords": [
     "JSON",
@@ -10,9 +10,14 @@
     "form"
   ],
   "maintainers": [
-    {
+      {
       "name": "Sabrine Chelbi",
       "email": "sabrine.chelbi@kit.edu"
+    },
+          {
+      "name": "Thomas Jejkal",
+      "email": "thomas.jejkal@kit.edu"
     }
-  ]
+  ],
+  "license": "Apache License 2.0"
 }
