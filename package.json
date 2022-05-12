@@ -12,8 +12,7 @@
   "repository": {
   "type": "git",
     "url": "https://github.com/kit-data-manager/metadata-editor"
-  }
-  
+  },
   "maintainers": [
       {
       "name": "Sabrine Chelbi",
@@ -30,7 +29,7 @@
       "bootstrap":"4.6.1",
       "ace-builds": "1.4.14",
       "spectrum-colorpicker": ">1.8.1",
-      "seballot-spectrum": "2.0.9",
+      "spectrum-colorpicker2": "2.0.9",
       "vanilla-picker": "2.12.1",
       "font-awesome": "6.1.1",
       "jquery-ui":"1.13.1",
