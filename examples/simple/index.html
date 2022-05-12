@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		
+        <title>Getting started with Metadata Editor</title>
+		<!--External dependencies-->
+		<script src="../../deps/jquery/jquery.min.js"></script>
+	    <link rel="stylesheet" href="../../deps/opt/bootstrap/css/bootstrap.min.css">
+
+		<script src="../../deps/opt/bootstrap/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="../../deps/opt/fontawesome/css/all.min.css"/>
+		<script src="../../deps/opt/validator/ajv/ajv.min.js"></script>
+		<script src="../../deps/underscore/underscore-umd-min.js"></script>
+		<!--Metadata Editor library-->
+		<script type="text/javascript" src="../../deps/jsonform/jsonform.min.js"></script>
+		<script type="text/javascript" src="../../lib/js/metadataeditor.js"></script>
+        <!--Input data-->
+		<script type="text/javascript" src="./schema.js"></script>
+		<script type="text/javascript" src="./ui-schema.js"></script>
+		<script type="text/javascript" src="./data.js"></script>
+		<link rel="stylesheet" href="./css/styles.css">
+		<!--Basic stylesheet-->
+		<link rel="stylesheet" href="../../deps/opt/boostrap/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="../../lib/css/metadataeditor.style.basic.css" />
+		
+	</head>
+	
+    <body>
+		<div class="container">
+            <div class="col-12">
+                <div class="boxlist margin-top-30" id="training-box">
+                    <div class="box-header bg-green-blue">
+                        <h3 class="box-title">Simple Form Examples</h3>
+					</div>
+					<div class="panel-group" id="accordion">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+										<span id="oneSpan" class="glyphicon glyphicon-menu-right text-success"></span> The First Form            
+									</a>
+								</h4>
+							</div>
+							<div id="collapseOne" class="panel-collapse collapse in">
+								<div class="panel-body">
+									<p>In this first example, we automatically generate a form from a simple JSON schema. The schema is read from <i><b>schema.js</b></i>, which directly assigns the schema to a variable called <i><b>dataModel</b></i>, that is used as input for the Metadata Editor Form. In addition, the form type is provided, which is in our case <i><b>CREATE</b></i>, which means we start with an empty form where all fields are editable. Thus, the parameter object looks as follows:
+									</p>
+<pre>
+var options = {
+	operation: "CREATE",
+	dataModel: this.dataModel
+};</pre>
+									Using these parameters, we can now insert the form into the page. It takes the <i><b>options</b></i> object for parameterization and renders where the <i><b>&lt;form id="plain"&gt;&lt;/form&gt;</b></i> tags are located in this HTML file:
+<pre>
+$('#plain').metadataeditorForm(options, (value) => {
+	var resource = value;
+	JSON.parse(JSON.stringify(resource));
+	Console.log(resource);
+});</pre>
+								Furthermore, the form received a callback function, which prints the resulting object at the console as soon as <i><b>CREATE</b></i> is clicked.</p>
+								<hr/>
+								<div class="box-body"> 
+									<form id="plain"></form>
+								</div>		
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+									<span id="twoSpan" class="glyphicon glyphicon-menu-right text-info"></span> A More Appealing Form            
+								</a>
+							</h4>
+						</div>
+						<div id="collapseTwo" class="panel-collapse collapse">
+							<div class="panel-body">
+								<p>Now, it's time to work on a more user-friendly representation of the form. There are two things we are doing: 
+									<ul>
+										<li>Apply a UI Schema</li>
+										<li>Overwrite the default submit button label</li>
+									</ul>
+									The UI Schema we include from the file <i><b>schema.js</b></i>, which assigns the schema to a variable called <i><b>uiSchema</b></i>. The resulting <i><b>options</b></i> object now looks as follows:
+<pre>
+var options = {
+	operation: "CREATE",
+	dataModel: this.dataModel
+	uiForm: this.uiSchema,
+	buttonTitle: "Submit"
+};</pre>
+									In addition to providing the <i><b>uiForm</b></i> property you also see, that we provide <i><b>buttonTitle</b></i> which overwrites the default label of the submit button. Having this done, the form is rendered where the <i><b>&lt;form id="with-schema&gt;&lt;/form&gt;</b></i> tags are located using the following JavaScript call:
+<pre>
+$('#with-schema').metadataeditorForm(options, (value) => {
+	var resource = value;
+	JSON.parse(JSON.stringify(resource));
+	Console.debug(resource);
+});</pre>
+								</p>
+								<hr/>	
+								<div class="box-body"> 
+									<form id="with-schema"></form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+									<span id="threeSpan" class="glyphicon glyphicon-menu-right text-info"></span> A Form with Data            
+									</a>
+							</h4>
+						</div>
+						<div id="collapseThree" class="panel-collapse collapse">
+							<div class="panel-body">
+								<p>Finally, we will learn how to add some data to show in the form. Therefore, we have a file <i><b>data.js</b></i> which contains a variable <i><b>resource</b></i> defining the input of our form. Furthermore, we have to change the options for parameterizing our form as follows:
+<pre>
+var options = {
+	operation: "READ",
+	dataModel: this.dataModel,
+	uiForm: this.uiSchema,
+	resource: this.resource,
+	buttonTitle: "Update"
+};</pre>
+									As you can see, we changed to operation to <i><b>READ</b></i>, as operation <i><b>CREATE</b></i> does not accept any inputs. This input is provided by property <i><b>resource</b></i> pointing to <i><b>this.resource</b></i> which comes from <i><b>data.js</b></i>.
+									The result is rendered where the <i><b>&lt;form id="with-data"&gt;&lt;/form&gt;</b></i> tags are located using the following JavaScript call:
+<pre>
+$('#with-data').metadataeditorForm(options, () => {});</pre>
+								</p>
+								For <i><b>READ</b></i> forms no callbacks are supported as they are purely for visualization. Thus, the callback function remains empty in this example.
+								<hr/>	
+								<div class="box-body"> 
+									<form id="with-data"></form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<script>
+		$('body').initializeModals();
+		
+////		var view = {
+			// The template describes the HTML that the field will generate.
+  // It uses Underscore.js templates.
+////template: '<div>' + 
+////			'<input  class="form-control typeahead" type="text" placeholder="<%=escape(node.placeholder)%>">' + 
+////			'<input id="ror-id-01" name="<%= node.name %>" value="<%= escape(node.value) %>" type="hidden">'+
+////		 '</div>',
+  
+  // Set the inputfield flag when the field is a real input field
+  // that produces a value. Set the array flag when it creates an
+  // array of fields. Both flags are mutually exclusive.
+  // Do not set any of these flags for containers and other types
+  // of fields.
+////  inputfield: true,
+////  array: false,
+
+  // Most real input fields should set this flag that wraps the
+  // generated content into the HTML code needed to report errors
+////  fieldtemplate: true,
+
+  // Return the root element created by the field
+  // (el is the DOM element whose id is node.id,
+  // this function is only useful when el is not the root
+  // element in the field's template)
+////  getElement: function (el) {
+    // Adjust the following based on your template. In this example
+    // there is an additional <div> so we need to go one level up.
+ ////   return $(el).get(1);
+////  },
+
+  // This is where you can complete the data that will be used
+  // to run the template string
+////  onBeforeRender: function (data, node) {},
+
+  // This is where you can enhance the generated HTML by adding
+  // event handlers if needed
+ //// onInsert: function (evt, node) {
+////	  var ROR_API_URL = "https://api.ror.org/organizations?affiliation="
+
+////$('.typeahead').typeahead({
+ ////   hint: false,
+ ////   highlight: true,
+ ////   minLength: 3
+ //// },
+ //// {
+ ////   limit: 50,
+ ////   async: true,
+ ////   source: function (query, processSync, processAsync) {
+  ////      url = ROR_API_URL + encodeURIComponent(query);
+ ////       return $.ajax({
+  ////          url: url,
+  ////          type: 'GET',
+  ////          dataType: 'json',
+ ////           success: function (json) {
+  ////              orgs = json.items
+ ////               return processAsync(orgs);
+  ////          }
+  ////      });
+  ////  },
+  ////  templates: {
+ ////     pending: [
+////        '<div class="empty-message">',
+////          'Fetching organizations list',
+ ////       '</div>'
+ ////     ].join('\n'),
+ ////     suggestion: function (data) {
+ ////         return '<p><strong>' + data.organization.name + '</strong><br>' + data.organization.types[0] + ', ' + data.organization.country.country_name + '</p>';
+ ////     }
+  ////  },
+  ////  display: function (data) {
+  ////    return data.organization.name;
+  ////  },
+  ////  value: function(data) {
+  ////    return data.organization.identifier;
+ ////   }
+////});
+
+////$('.typeahead').bind('typeahead:select', function(ev, suggestion) {
+////  $('#ror-id-01').val(suggestion.organization.id);
+////});
+////	  }
+////};
+		
+	////	JSONForm.fieldTypes['ror-organization'] = view;
+	
+		$('#accordion').on('show.bs.collapse', function (element) {
+		var id = '#' + element.target.id.replace('collapse','').toLowerCase() + 'Span';
+		$(id).addClass("glyphicon-menu-down");
+		});
+		$('#accordion').on('hidden.bs.collapse', function (element) {
+		var id = '#' + element.target.id.replace('collapse','').toLowerCase() + 'Span';
+		$(id).removeClass("glyphicon-menu-down");
+		});
+		
+		resolveRefs(dataModel, dataModel.$defs);
+		
+	var options = {
+		operation: "CREATE",
+		dataModel: this.dataModel
+		};
+	$('#plain').metadataeditorForm(options, (value) => {
+		var resource = value;
+		JSON.parse(JSON.stringify(resource));
+		console.log(resource);
+		alert(resource);
+	});
+	var options = {
+		operation: "CREATE",
+		dataModel: this.dataModel,
+		uiForm: this.uiSchema,
+		buttonTitle: "Submit"
+	};
+	$('#with-schema').metadataeditorForm(options, (value) => {
+		var resource = value;
+		JSON.parse(JSON.stringify(resource));
+		console.log(resource);
+		alert(resource);
+	});
+	var options = {
+		operation: "READ",
+		dataModel: this.dataModel,
+		uiForm: this.uiSchema,
+		resource: this.resource,
+		buttonTitle: "OK"
+	};
+	$('#with-data').metadataeditorForm(options, () => {});
+</script>
+</body>
+</html>
