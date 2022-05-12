@@ -9,6 +9,11 @@
     "editor",
     "form"
   ],
+  "repository": {
+  "type": "git",
+    "url": "https://github.com/kit-data-manager/metadata-editor"
+  }
+  
   "maintainers": [
       {
       "name": "Sabrine Chelbi",
@@ -23,14 +28,14 @@
   "dependencies": {
       "jquery":"3.6.0",
       "bootstrap":"4.6.1",
-      "ace": "1.4.14",
-      "spectrum": ">1.8.1",
+      "ace-builds": "1.4.14",
+      "spectrum-colorpicker": ">1.8.1",
       "seballot-spectrum": "2.0.9",
       "vanilla-picker": "2.12.1",
-      "Font-Awesome": "6.1.1",
+      "font-awesome": "6.1.1",
       "jquery-ui":"1.13.1",
-      "floating-ui":"1.16.1",
-      "tabulator":"4.8.1",
+      "@floating-ui/dom":"1.16.1",
+      "tabulator-tables":"4.8.1",
       "jsv":"4.0.2",
       "z-schema":"5.0.2",
       "ajv":"6.12.6",
