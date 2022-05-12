@@ -1,6 +1,6 @@
 {
   "name": "@kit-data-manager/metadata-editor",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "main": "./lib/js/metadataeditor.js",
   "description": "JavaScript library allowing to generate web forms and validate metadata using JSON schemas.",
   "keywords": [
