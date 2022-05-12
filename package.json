@@ -1,6 +1,6 @@
 {
   "name": "@kit-data-manager/metadata-editor",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "main": "./lib/js/metadataeditor.js",
   "description": "JavaScript library allowing to generate web forms and validate metadata using JSON schemas.",
   "keywords": [
@@ -19,5 +19,22 @@
       "email": "thomas.jejkal@kit.edu"
     }
   ],
-  "license": "Apache License 2.0"
+  "license": "Apache License 2.0",
+  "dependencies": {
+      "jquery":"3.6.0",
+      "bootstrap":"4.6.1",
+      "ace": "1.4.14",
+      "spectrum": ">1.8.1",
+      "seballot-spectrum": "2.0.9",
+      "vanilla-picker": "2.12.1",
+      "Font-Awesome": "6.1.1",
+      "jquery-ui":"1.13.1",
+      "floating-ui":"1.16.1",
+      "tabulator":"4.8.1",
+      "jsv":"4.0.2",
+      "z-schema":"5.0.2",
+      "ajv":"6.12.6",
+      "summernote":"0.8.20",
+      "underscore":"1.13.2"
+  }
 }

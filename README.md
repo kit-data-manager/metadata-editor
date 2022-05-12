@@ -1,7 +1,10 @@
+[![NPM Version](https://img.shields.io/npm/v/@kit-data-manager/metadata-editor)](https://www.npmjs.com/package/@kit-data-manager/metadata-editor)
+[![](https://data.jsdelivr.com/v1/package/npm/@kit-data-manager/metadata-editor/badge)](https://www.jsdelivr.com/package/npm/@kit-data-manager/metadata-editor)
+
 Metadata Editor
 ===============
 
-The Metadata Editor is a JavaScript library allowing to generate web forms and validate metadata in an intuitive and generic way with the help of [JSON Form Library](https://github.com/jsonform/jsonform/wiki). Moreover, it enables to list various resources given by the user as a JSON object or fetched from a remote service making use of the [Tabulator Library](http://tabulator.info/). To interact with the data, different operations can be optionally defined and associated with callback functions. In order to support newer JSON schema specifications, [Ajv JSON Schema Validator](https://ajv.js.org/) has been integrated in the JSON Form Library. 
+The Metadata Editor is a JavaScript library allowing to generate web forms and validate metadata in an intuitive and generic way with the help of [JSON Form Library](https://github.com/jsonform/jsonform/wiki). Moreover, it enables to list various resources given by the user as a JSON object or fetched from a remote service making use of the [Tabulator Library](http://tabulator.info/). To interact with the data, different operations can be optionally defined and associated with callback functions.
 
 Objectives
 ----------
@@ -13,39 +16,47 @@ Objectives
 Dependencies
 ------------
 
-For using the Metadata Editor, different dependencies must be added depending on the envisioned use case. In any case, three dependecies are required:
+For using the Metadata Editor, different dependencies must be added depending on the envisioned use case. In any case, four dependecies are required:
 
 * lib/js/metadataeditor.js
 * lib/css/metadataeditor.style.basic.css
-* deps/jsonform/jsonform.js
+* deps/jsonform/jsonform.min.js
+* deps/underscore/underscore-umd-min.js
 
-The Metadata Editor comes with a slightly adapted version of the JSON Form Library, currently based on version 2.2.5. In comparison to the official release, the custom version used the [Ajv JSON Schema Validator](https://ajv.js.org/) for schema validation as this library supports more recent specification versions than JSV, which is the default library used by JSON Schema Form.  
+The Metadata Editor comes with [inofficial fork](https://github.com/piorek94/jsonform) of the JSON Form Library, currently based on version 2.2.5. In comparison to the official release, the fork contains several improvements, dependency updates and support for different validation libraries, e.g., [Ajv](https://ajv.js.org/).
 
 In addition, if you just want to render a single form for a given resource, you will need:
 
-| Dependency             | Version |
-|------------------------|---------|
-| JQuery JS              | 3.5.1   |
-| Bootstrap CSS          | 3.3.7   |
-| Bootstrap-Theme CSS    | 3.3.7   |
-| Bootstrap JS           | 3.3.7   |
-| Font-Awesome CSS       | 6.1.1   |
-| Ajv 7 JS               | 8.11.0  |
-| Ajv 2019 JS            | 8.11.0  |
-| Ajv 2020 JS (Optional) | 8.11.0  |
-| Underscore JS          | 1.8.3   |
-
-Regarding Ajv you an choose which versions you want to include based on the JSON schema specification you are planning to use. However, especially for schema draft 2020-12 there is only limited support by JSON Schema Form, which is why this dependecy is markes as optional. The default validation, which is used if $schema is not defined or is not 2019-09 or 2020-12, is based on schema specification draft-07. Thus, Ajv 7 should at least been included to avoid runtime errors.
+| Dependency             | Path    					  						|
+|------------------------|--------------------------------------------------|
+| JQuery JS              | deps/jquery/jquery.min.js  						|
+| Bootstrap CSS          | deps/opt/bootstrap/css/bootstrap.min.css   		|
+| Bootstrap-Theme CSS    | deps/opt/bootstrap/css/bootstrap-theme.min.css   |
+| Bootstrap JS           | deps/opt/bootstrap/js/bootstrap.min.js   		|
+| Font-Awesome CSS       | deps/opt/fontawesome/css/all.min.css   			|
+| Ajv 7 JS               | deps/opt/validator/ajv/ajv.min.js      			|
 
 In case you also want to show listings of multiple resources, you'll additionally need the following Tabulator dependencies:
 
-| Dependency               | Version |
-|--------------------------|---------|
-| Tabulator Bootstrap4 CSS | 4.8.1   |
-| Tabulator JS             | 4.8.1   |
+| Dependency               | Path 											   |
+|--------------------------|---------------------------------------------------|
+| Tabulator Bootstrap4 CSS | deps/opt/tabulator/tabulator_bootstrap4.min.css   |
+| Tabulator JS             | deps/opt/tabulator/tabulator.min.js   			   |
 
-All external dependencies can be included from external providers and are therefore not part of this repository. 
-Please refer to the examples in the `examples` folder to find out from where to include a certain dependency.
+The metadata-editor is available as npm package [@kit-data-manager/metadata-editor](https://www.npmjs.com/package/@kit-data-manager/metadata-editor). 
+In order to include required dependencies, it is recommended to use [jsDelivr](https://www.jsdelivr.com/), which allows to include files located inside 
+npm packages. In order to do so, please use the following base URL: 
+
+```
+https://cdn.jsdelivr.net/npm/@kit-data-manager/metadata-editor@0.9.1/
+```
+
+You may omit the `@0.9.1` version prefix to use the most recent version of our npm package. 
+
+For your HTML page, this will result in ref/src attributes like `https://cdn.jsdelivr.net/npm/@kit-data-manager/metadata-editor@0.9.1/lib/js/metadataeditor.js` to refer to `lib/js/metadataeditor.js` or `https://cdn.jsdelivr.net/npm/@kit-data-manager/metadata-editor@0.9.1/deps/jquery/jquery.min.js` for including the 
+JQuery dependency.
+
+Please also refer to the examples in the `examples` folder to find out how this may look like.
 
 Getting started
 ---------------
@@ -175,6 +186,11 @@ The Metadata editor enables the developer to generate modal windows with the hel
 •	Message: represents the message, which should be shown in the modal body.
 
 •	Link: represents the link of the page, where should be redirected after the modal is closed.
+
+License
+-------
+
+The metadata-editor is licensed under the Apache License, Version 2.0.
 
 
 
